@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Content Generator - Create Magic</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Animated Background -->
+        <div class="animated-background">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-magic"></i>
+                <span>AI Content Creator</span>
+            </div>
+            <nav class="nav">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="title-line">Create</span>
+                        <span class="title-line">Mind-Blowing</span>
+                        <span class="title-line">Content</span>
+                    </h1>
+                    <p class="hero-subtitle">Transform your ideas into stunning visuals and text with AI-powered generation</p>
+                    
+                    <!-- AI Content Generator Tabs -->
+                    <div class="content-tabs">
+                        <div class="tab-button active" data-tab="image">
+                            <i class="fas fa-image"></i>
+                            <span>Image</span>
+                        </div>
+                        <div class="tab-button" data-tab="text">
+                            <i class="fas fa-font"></i>
+                            <span>Text</span>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Image Generator Form -->
+                    <div class="generator-container" id="imageGenerator" data-tab="image">
+                        <div class="input-group">
+                            <div class="prompt-input-wrapper">
+                                <textarea 
+                                    id="promptInput" 
+                                    class="prompt-input" 
+                                    placeholder="Describe the image you want to create..."
+                                    rows="3"
+                                ></textarea>
+                                <div class="input-animation"></div>
+                            </div>
+                            <button id="generateBtn" class="generate-btn">
+                                <span class="btn-text">Generate Image</span>
+                                <div class="btn-loader">
+                                    <div class="spinner"></div>
+                                </div>
+                            </button>
+                        </div>
+                        
+                        <!-- Style Options -->
+                        <div class="style-options">
+                            <h3>Choose Style</h3>
+                            <div class="style-grid">
+                                <div class="style-option active" data-style="realistic">
+                                    <div class="style-icon">🎨</div>
+                                    <span>Realistic</span>
+                                </div>
+                                <div class="style-option" data-style="artistic">
+                                    <div class="style-icon">🖼️</div>
+                                    <span>Artistic</span>
+                                </div>
+                                <div class="style-option" data-style="cartoon">
+                                    <div class="style-icon">📺</div>
+                                    <span>Cartoon</span>
+                                </div>
+                                <div class="style-option" data-style="abstract">
+                                    <div class="style-icon">✨</div>
+                                    <span>Abstract</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text Generator Form -->
+                    <div class="generator-container" id="textGenerator" data-tab="text" style="display: none;">
+                        <div class="input-group">
+                            <div class="prompt-input-wrapper">
+                                <textarea 
+                                    id="textPromptInput" 
+                                    class="prompt-input" 
+                                    placeholder="Describe the text content you want to generate..."
+                                    rows="3"
+                                ></textarea>
+                                <div class="input-animation"></div>
+                            </div>
+                            <button id="generateTextBtn" class="generate-btn">
+                                <span class="btn-text">Generate Text</span>
+                                <div class="btn-loader">
+                                    <div class="spinner"></div>
+                                </div>
+                            </button>
+                        </div>
+                        
+                        <!-- Text Type Options -->
+                        <div class="style-options">
+                            <h3>Choose Text Type</h3>
+                            <div class="style-grid">
+                                <div class="text-option active" data-type="creative">
+                                    <div class="style-icon">✍️</div>
+                                    <span>Creative</span>
+                                </div>
+                                <div class="text-option" data-type="professional">
+                                    <div class="style-icon">💼</div>
+                                    <span>Professional</span>
+                                </div>
+                                <div class="text-option" data-type="casual">
+                                    <div class="style-icon">😊</div>
+                                    <span>Casual</span>
+                                </div>
+                                <div class="text-option" data-type="academic">
+                                    <div class="style-icon">🎓</div>
+                                    <span>Academic</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+
+            <!-- Generated Content Display -->
+            <section class="content-display">
+                <!-- Image Display -->
+                <div class="display-container" id="imageDisplay" data-tab="image">
+                    <div class="image-container">
+                        <div class="placeholder-image">
+                            <i class="fas fa-image"></i>
+                            <p>Your generated image will appear here</p>
+                        </div>
+                        <div class="generated-image" id="generatedImage" style="display: none;">
+                            <img id="resultImage" src="" alt="Generated Image">
+                            <div class="image-actions">
+                                <button class="action-btn download-btn">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                                <button class="action-btn share-btn">
+                                    <i class="fas fa-share"></i>
+                                    Share
+                                </button>
+                                <button class="action-btn regenerate-btn" onclick="handleGenerateClick()">
+                                    <i class="fas fa-redo"></i>
+                                    Regenerate
+                                </button>
+                            </div>
+                            <div class="image-url-section">
+                                <div class="url-display">
+                                    <input type="text" id="imageUrl" readonly placeholder="Image URL will appear here">
+                                    <button class="action-btn copy-url-btn" onclick="copyImageUrl()">
+                                        <i class="fas fa-copy"></i>
+                                        Copy URL
+                                    </button>
+                                </div>
+                                <button class="action-btn open-url-btn" onclick="openImageUrl()">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Open in New Tab
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Display -->
+                <div class="display-container" id="textDisplay" data-tab="text" style="display: none;">
+                    <div class="text-container">
+                        <div class="placeholder-text">
+                            <i class="fas fa-font"></i>
+                            <p>Your generated text will appear here</p>
+                        </div>
+                        <div class="generated-text" id="generatedText" style="display: none;">
+                            <div class="text-content" id="textContent"></div>
+                            <div class="text-actions">
+                                <button class="action-btn copy-text-btn">
+                                    <i class="fas fa-copy"></i>
+                                    Copy Text
+                                </button>
+                                <button class="action-btn share-btn">
+                                    <i class="fas fa-share"></i>
+                                    Share
+                                </button>
+                                <button class="action-btn regenerate-btn" onclick="handleTextGenerateClick()">
+                                    <i class="fas fa-redo"></i>
+                                    Regenerate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </section>
+
+            <!-- Gallery Section -->
+            <section class="gallery" id="gallery">
+                <h2 class="section-title">Recent Creations</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://picsum.photos/300/300?random=1" alt="Gallery Image">
+                        <div class="gallery-overlay">
+                            <h3>Mountain Landscape</h3>
+                            <p>Realistic style</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://picsum.photos/300/300?random=2" alt="Gallery Image">
+                        <div class="gallery-overlay">
+                            <h3>Cyberpunk City</h3>
+                            <p>Artistic style</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://picsum.photos/300/300?random=3" alt="Gallery Image">
+                        <div class="gallery-overlay">
+                            <h3>Abstract Waves</h3>
+                            <p>Abstract style</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://picsum.photos/300/300?random=4" alt="Gallery Image">
+                        <div class="gallery-overlay">
+                            <h3>Fantasy Castle</h3>
+                            <p>Cartoon style</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AI Content Creator</h3>
+                    <p>Transform your imagination into reality with AI-powered generation</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AI Image Creator. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="loading-modal" id="loadingModal">
+        <div class="modal-content">
+            <div class="loading-animation">
+                <div class="loading-circle"></div>
+                <div class="loading-circle"></div>
+                <div class="loading-circle"></div>
+            </div>
+            <h3>Creating Your Masterpiece</h3>
+            <p>This may take a few moments...</p>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
